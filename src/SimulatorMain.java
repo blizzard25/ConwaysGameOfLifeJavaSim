@@ -36,20 +36,16 @@ public class SimulatorMain {
         //get user input for the 2D population matrix
         for(int row = 0; row < 3; row++) {
         	for(int col = 0 ;col < 3; col++) { 
-        		if(col == 0) {
-        			System.out.print(row == 0 ? "population[0][0] = " : row == 1 ? "population[1][0] = " : "population[2][0] = "); 
-        		} else if(col == 1) {
-        			System.out.print(row == 0 ? "population[0][1] = " : row == 1 ? "population[1][1] = " : "population[2][1] = ");
-        		} else {
-        			System.out.print(row == 0 ? "population[0][2] = " : row == 1 ? "population[1][2] = " : "population[2][2] = ");
-        		}
+        		if(col == 0) System.out.print(row == 0 ? "population[0][0] = " : row == 1 ? "population[1][0] = " : "population[2][0] = "); 
+        		else if(col == 1) System.out.print(row == 0 ? "population[0][1] = " : row == 1 ? "population[1][1] = " : "population[2][1] = ");
+        		else System.out.print(row == 0 ? "population[0][2] = " : row == 1 ? "population[1][2] = " : "population[2][2] = ");
         		double enteredValue = in.nextDouble();
         		//check if user input isn't 0 or 1
         		if(enteredValue != 0 && enteredValue != 1 && enteredValue != (int)enteredValue) {
         			while(true) {
         				System.out.println("\nError in entered value : Please only enter a value of '0' or '1'");
         				enteredValue = in.nextDouble();
-        				if((enteredValue == 0 || enteredValue == 1) & enteredValue == (int)enteredValue) break;
+        				if((enteredValue == 0 || enteredValue == 1) && enteredValue == (int)enteredValue) break;
         			}
         		}
         		population[row][col] = (int)enteredValue;
@@ -60,7 +56,7 @@ public class SimulatorMain {
         return population; 
 	}
     
-    static int fillGenerationCycles() {
+	static int fillGenerationCycles() {
     	System.out.println("Enter the number of generation cycles\nPlease enter a value greater than or equal to '0'");
     	double gen = in.nextDouble();
     	//check if user input is not an integer or isn't greater than or equal to 0
@@ -74,27 +70,23 @@ public class SimulatorMain {
     	//close the scanner
     	in.close();
     	return (int)gen;
-    }
+	}
     
-	private static class Cells {
-		
-		//2D array for the 2D population of a specific generation
-        int [][] cells;
+    private static class Cells {
+    	
+    	//2D array for the 2D population of a specific generation
+    	int [][] cells;
 
-        //constructor for the Cells inner class
-        Cells(int[][] cells) { this.cells = cells; }
+    	//constructor for the Cells inner class
+    	Cells(int[][] cells) { this.cells = cells; }
         
-        //set the cell for a given row and column
-        void setCell(int x, int y, int value) {
-            cells[y][x] = value;
-        }
+    	//set the cell for a given row and column
+    	void setCell(int x, int y, int value) { cells[y][x] = value; }
 
-        int getCell(int x, int y) {
-            return (y >= 0 && y < cells.length) && (x >= 0 && x < cells[y].length) ? cells[y][x] : 0;
-        }
+    	int getCell(int x, int y) { return (y >= 0 && y < cells.length) && (x >= 0 && x < cells[y].length) ? cells[y][x] : 0; }
 
-        //get the number of live neighbors
-        int getNeighborCount(int x, int y, int result) {
+    	//get the number of live neighbors
+    	int getNeighborCount(int x, int y, int result) {
             for (int i = x - 1; i <= x + 1; i++) {
                 for (int j = y - 1; j <= y + 1; j++) result = (!(i == x && j == y)) ? result += getCell(i, j) : result;
             }
@@ -102,8 +94,7 @@ public class SimulatorMain {
         }
 
         private int[][] getCellArea(int x0, int y0, int x1, int y1) {
-            int height = y1 - y0 + 1, width = x1 - x0 + 1;
-            Cells cellsArea = new Cells(new int[height][width]);
+            Cells cellsArea = new Cells(new int[y1 - y0 + 1][x1 - x0 + 1]);
             for (int x = x0; x <= x1; x++) {
                 for (int y = y0; y <= y1; y++) cellsArea.setCell(x - x0, y - y0, getCell(x, y));
             }
