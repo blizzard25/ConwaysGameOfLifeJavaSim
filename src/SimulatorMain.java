@@ -14,6 +14,7 @@ public class SimulatorMain {
 	    System.out.print("\nSimulated population matrix = " + Arrays.deepToString(getGeneration(population, generations)));
 	}
 	
+	//get the output generation based on user input population cells and generation cycles
     static int[][] getGeneration(int[][] cells, int generations) {
     	//cells for the current generation
         Cells generation = new Cells(cells);
@@ -33,7 +34,7 @@ public class SimulatorMain {
         		"\nhttps://en.wikipedia.org/wiki/Conway's_Game_of_Life\n\nThe population will be limited to a 3 row, 3 column matrix" +
         		"Enter your 3 by 3 population matrax for population[row][column]\nPlease only enter a value of '0' (dead cell) or '1' (live cell)\n");
         //get user input for the 2D population matrix
-        for(int row = 0; row < 3; row++) { 
+        for(int row = 0; row < 3; row++) {
         	for(int col = 0 ;col < 3; col++) { 
         		if(col == 0) {
         			System.out.print(row == 0 ? "population[0][0] = " : row == 1 ? "population[1][0] = " : "population[2][0] = "); 
@@ -95,10 +96,7 @@ public class SimulatorMain {
         //get the number of live neighbors
         int getNeighborCount(int x, int y, int result) {
             for (int i = x - 1; i <= x + 1; i++) {
-                for (int j = y - 1; j <= y + 1; j++) {
-                    //if (!(i == x && j == y)) result +=  getCell(i, j);
-                	result = (!(i == x && j == y)) ? result += getCell(i, j) : result;
-                }
+                for (int j = y - 1; j <= y + 1; j++) result = (!(i == x && j == y)) ? result += getCell(i, j) : result;
             }
             return result;
         }
@@ -112,6 +110,7 @@ public class SimulatorMain {
             return cellsArea.cells;
         }
 
+        //crop the cell matrix
         void crop() {
             int minX = cells.length, maxX = 0, minY = cells[0].length, maxY = 0;
             for(int i = 0; i < cells.length; i++) {
