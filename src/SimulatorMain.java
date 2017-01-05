@@ -1,31 +1,41 @@
 import java.util.*;
 
 public class SimulatorMain {
-
+	
 	//scanner for user input
 	static Scanner in = new Scanner(System.in);
 	
 	public static void main(String[] args) {
+		
 		//get user population input
 	    int[][] population = fillPopulation();
+	    
 	    //get user generation cycle input
 	    int generations = fillGenerationCycles();
+	    
 	    //print the result
 	    System.out.print("\nSimulated population matrix = " + Arrays.deepToString(getGeneration(population, generations)));
+	    
 	}
 	
 	//get the output generation based on user input population cells and generation cycles
     static int[][] getGeneration(int[][] cells, int generations) {
+    	
     	//cells for the current generation
         Cells generation = new Cells(cells);
+        
         //get all generations using an input of the previous generation
         for (int i = 0; i < generations; i++) generation = generation.getNextGeneration();
+        
+        //get the output of the program
         return generation.cells;
     }
     
-    static int[][] fillPopulation() { 
+    static int[][] fillPopulation() {
+    	
     	//3x3 matrix of user input
         int[][] population = new int[3][3];
+        
         //instructions
         System.out.println("Conway's Game of Life is a 0 player simulation game. The game involves a matrix of" +
         		"\ncells which are either 'alive' or 'dead'. You, the user, will provide the population input for this matrix," +
@@ -33,6 +43,7 @@ public class SimulatorMain {
         		"\ninput and the program does the rest. For an explanation of the rules of Conway's Game of Life, see the link below:" +
         		"\nhttps://en.wikipedia.org/wiki/Conway's_Game_of_Life\n\nThe population will be limited to a 3 row, 3 column matrix" +
         		"Enter your 3 by 3 population matrax for population[row][column]\nPlease only enter a value of '0' (dead cell) or '1' (live cell)\n");
+        
         //get user input for the 2D population matrix
         for(int row = 0; row < 3; row++) {
         	for(int col = 0 ;col < 3; col++) { 
@@ -40,6 +51,7 @@ public class SimulatorMain {
         		else if(col == 1) System.out.print(row == 0 ? "population[0][1] = " : row == 1 ? "population[1][1] = " : "population[2][1] = ");
         		else System.out.print(row == 0 ? "population[0][2] = " : row == 1 ? "population[1][2] = " : "population[2][2] = ");
         		double enteredValue = in.nextDouble();
+        		
         		//check if user input isn't 0 or 1
         		if(enteredValue != 0 && enteredValue != 1 && enteredValue != (int)enteredValue) {
         			while(true) {
@@ -49,6 +61,7 @@ public class SimulatorMain {
         			}
         		}
         		population[row][col] = (int)enteredValue;
+        		
         		//print newline at the end of column 2
         		System.out.print(col == 2 ? "\n" : "");
         	} 
@@ -57,8 +70,10 @@ public class SimulatorMain {
 	}
     
 	static int fillGenerationCycles() {
+		
     	System.out.println("Enter the number of generation cycles\nPlease enter a value greater than or equal to '0'");
     	double gen = in.nextDouble();
+    	
     	//check if user input is not an integer or isn't greater than or equal to 0
     	if(gen < 0 && gen != (int)gen) {
     		while(true) {
@@ -67,6 +82,7 @@ public class SimulatorMain {
     			if(gen >= 0 && gen == (int)gen) break;
     		}
     	}
+    	
     	//close the scanner
     	in.close();
     	return (int)gen;
