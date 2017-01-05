@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class SimulatorMain {
 	
@@ -7,13 +8,7 @@ public class SimulatorMain {
 	
 	public static void main(String[] args) {
 		
-		//get user population input
-	    //int[][] population = fillPopulation();
-	    
-	    //get user generation cycle input
-	    //int generations = fillGenerationCycles();
-	    
-	    //print the result
+	    //get user population and gen cycle input, then print the result
 	    System.out.print("\nSimulated population matrix = " + Arrays.deepToString(getGeneration(fillPopulation(), fillGenerationCycles())));
 	    
 	}
