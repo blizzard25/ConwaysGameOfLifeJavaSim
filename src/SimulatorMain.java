@@ -8,13 +8,13 @@ public class SimulatorMain {
 	public static void main(String[] args) {
 		
 		//get user population input
-	    int[][] population = fillPopulation();
+	    //int[][] population = fillPopulation();
 	    
 	    //get user generation cycle input
-	    int generations = fillGenerationCycles();
+	    //int generations = fillGenerationCycles();
 	    
 	    //print the result
-	    System.out.print("\nSimulated population matrix = " + Arrays.deepToString(getGeneration(population, generations)));
+	    System.out.print("\nSimulated population matrix = " + Arrays.deepToString(getGeneration(fillPopulation(), fillGenerationCycles())));
 	    
 	}
 	
